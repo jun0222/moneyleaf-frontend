@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## リポジトリのセットアップ
 
-## Getting Started
-
-First, run the development server:
+## 1. リポジトリの作成
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 新しいディレクトリを作成
+mkdir moneyleaf-frontend
+cd moneyleaf-frontend
+# Gitリポジトリを初期化
+git init
+# .gitignoreファイルを作成
+cat > .gitignore << EOL
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+# testing
+/coverage
+# next.js
+/.next/
+/out/
+# production
+/build
+# misc
+.DS_Store
+*.pem
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# local env files
+.env*.local
+.env
+# vercel
+.vercel
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+EOL
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 2. Next.js プロジェクトの初期化
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Next.jsプロジェクトを作成（TypeScriptを使用）
+npx create-next-app@latest . --typescript --tailwind --eslint
+# 質問に回答：
+# ✔ Would you like to use TypeScript? … Yes
+# ✔ Would you like to use ESLint? … Yes
+# ✔ Would you like to use Tailwind CSS? … Yes
+# ✔ Would you like to use `src/` directory? … Yes
+# ✔ Would you like to use App Router? … Yes
+# ✔ Would you like to customize the default import alias (@/*)? … Yes
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 3. shadcn/ui のインストール
 
-## Learn More
+```bash
+# shadcn-uiのCLIをインストール
+npx shadcn-ui@latest init
+# 質問に回答：
+# ✓ Would you like to use TypeScript (recommended)? … yes
+# ✓ Which style would you like to use? › Default
+# ✓ Which color would you like to use as base color? › Slate
+# ✓ Where is your global CSS file? … src/app/globals.css
+# ✓ Would you like to use CSS variables for colors? … yes
+# ✓ Are you using a custom tailwind prefix eg. tw-? … no
+# ✓ Where is your tailwind.config.js located? … tailwind.config.ts
+# ✓ Configure the import alias for components: … @/components
+# ✓ Configure the import alias for utils: … @/lib/utils
+# ✓ Are you using React Server Components? … yes
+# ✓ Write configuration to components.json. Proceed? … yes
+# 必要なコンポーネントをインストール
+npx shadcn-ui@latest add button
+npx shadcn-ui@latest add form
+npx shadcn-ui@latest add input
+npx shadcn-ui@latest add select
+npx shadcn-ui@latest add card
+npx shadcn-ui@latest add table
+npx shadcn-ui@latest add calendar
+npx shadcn-ui@latest add datepicker
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 4. API クライアントのセットアップ
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# APIクライアントのインストール
+npm install axios
+# React Queryのインストール（データフェッチングと状態管理用）
+npm install @tanstack/react-query
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 5. 環境変数の設定
 
-## Deploy on Vercel
+```bash
+# .envファイルを作成
+cat > .env.local << EOL
+NEXT_PUBLIC_API_URL=https://your-rails-api.render.com/api/moneyleaf
+EOL
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 6. 最初のコミット
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# 変更をステージング
+git add .
+# 最初のコミットを作成
+git commit -m "Initial commit for Moneyleaf frontend with Next.js and shadcn/ui"
+# リモートリポジトリの追加（GitHub, GitLab, Bitbucketなど）
+git remote add origin https://github.com/yourusername/moneyleaf-frontend.git
+# プッシュ
+git push -u origin main
+```
+
+## 7. 開発サーバーの起動
+
+```bash
+# 開発サーバーを起動
+npm run dev
+```
