@@ -1,17 +1,24 @@
 "use client";
 
-import * as React from "react";
+import { useState, useEffect } from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { type ThemeProviderProps } from "next-themes/dist/types";
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  // クライアントサイドでのみマウント
-  const [mounted, setMounted] = React.useState(false);
+export function ThemeProvider({ 
+  children,
+  ...props
+}: {
+  children: React.ReactNode;
+  [key: string]: any;
+}) {
+  // クライアントサイドでのみレンダリングを行うためのフラグ
+  const [mounted, setMounted] = useState(false);
 
-  React.useEffect(() => {
+  // マウント時にのみレンダリングする
+  useEffect(() => {
     setMounted(true);
   }, []);
 
+  // 初期レンダリング時にはテーマプロバイダーを使わない
   if (!mounted) {
     return <>{children}</>;
   }

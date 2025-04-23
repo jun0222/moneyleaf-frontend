@@ -1,28 +1,40 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-// import "./globals.css"; // TODO: 不要確認
-import { ThemeProvider } from "@/components/theme-provider";
-import { QueryProvider } from "@/components/query-provider";
+"use client";
 
-const inter = Inter({ subsets: ["latin"] });
+import * as React from "react";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
-export const metadata: Metadata = {
-  title: "Moneyleaf | スマートな家計管理",
-  description: "シンプルで使いやすい家計簿アプリ",
-};
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export function ModeToggle() {
+  const { setTheme } = useTheme();
+
   return (
-    <html lang="ja" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light">
-          <QueryProvider>{children}</QueryProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="icon">
+          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <span className="sr-only">テーマを切り替え</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => setTheme("light")}>
+          ライト
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark")}>
+          ダーク
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("system")}>
+          システム
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import ModeToggle from "@/components/mode-toggle";
+import { ModeToggle } from "@/components/mode-toggle";
 
 export function Header() {
   return (
