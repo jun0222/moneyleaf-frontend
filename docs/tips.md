@@ -1,40 +1,4 @@
-test
 
-## commitlint
-
-### インストール
-
-```bash
-npm install --save-dev husky
-npx husky init
-
-# コミットメッセージ検証用フックを作成
-echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg
-
-# 実行権限を付与
-chmod +x .husky/commit-msg
-```
-
-### rootに以下を設置
-
-```js
-// commitlint.config.js
-module.exports = {
-  extends: ['@commitlint/config-conventional'],
-  rules: {
-    'type-enum': [2, 'always', [
-      'feat','fix','docs','style','refactor','perf','test','build','ci','chore','revert'
-    ]],
-    'scope-enum': [2, 'always', [
-      'transactions','balance','readme','ui','db-schema','report','api','docker','github-actions','deps'
-    ]],
-    'header-max-length': [2, 'always', 72],
-    'subject-case': [0],
-    'body-leading-blank': [2, 'always'],
-    'footer-leading-blank': [2, 'always']
-  }
-};
-```
 
 ## touchコマンドで複数ファイルを作成
 
