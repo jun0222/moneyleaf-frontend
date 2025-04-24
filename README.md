@@ -12,10 +12,10 @@ Conventional Commits 規約に従ってコミットメッセージを記述
 <type>(<scope>): <subject>
 ```
 
-###　参考
+### 参考
 
 - [conventionalcommits.org](https://www.conventionalcommits.org/en/v1.0.0/)
-- [Github](https://github.com/conventional-changelog/commitlint)
+- [GitHub](https://github.com/conventional-changelog/commitlint)
 
 ### 例
 
