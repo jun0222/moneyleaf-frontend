@@ -8,6 +8,8 @@ export function ThemeProvider({
   ...props
 }: {
   children: React.ReactNode;
+  // TODO: anyを使わないようにする
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }) {
   // クライアントサイドでのみレンダリングを行うためのフラグ
