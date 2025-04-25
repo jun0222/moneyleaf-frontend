@@ -66,7 +66,14 @@ export function ExpenseList() {
     
     // 月ごとにソート（新しい月が上に来るように）
     return Object.entries(groups)
-      .sort(([keyA], [keyB]) => keyB.localeCompare(keyA))
+      .sort(([keyA], [keyB]) => {
+        // 数値でソートするため、年と月を分解して比較
+        const [yearA, monthA] = keyA.split('-').map(Number);
+        const [yearB, monthB] = keyB.split('-').map(Number);
+        
+        // 年で比較し、同じ年なら月で比較
+        return yearB !== yearA ? yearB - yearA : monthB - monthA;
+      })
       .map(([key, expenseList]) => {
         const [year, month] = key.split('-').map(Number);
         // 日付でソート（新しい日付が上に来るように）
